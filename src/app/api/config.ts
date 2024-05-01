@@ -1,5 +1,6 @@
 import Airtable from "airtable";
 import nodeMailer from "nodemailer";
+import jwt from "jsonwebtoken";
 
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",
@@ -24,8 +25,10 @@ export const emailTemplate = (link: string) => `
   <p>${link}</p>
 `;
 
-// export const makeToken = (email: string) => {
-//   const expirationDate = new Date();
-//   expirationDate.setHours(new Date().getHours() + 1);
-//   return jwt.sign({ email, expirationDate }, process.env.JWT_SECRET_KEY);
-// };
+export const makeToken = (email: string) => {
+  const expirationDate = new Date();
+  expirationDate.setHours(new Date().getHours() + 1);
+  const token = jwt.sign({ email, expirationDate }, "shhhhh");
+
+  return token;
+};

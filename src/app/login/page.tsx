@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { API_URL } from "../environment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -15,6 +15,21 @@ export default function SignUpPage() {
     const body = { email };
     await axios.post(`${API_URL}/login`, body);
   };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+    if (token) {
+      axios
+        .get(`${API_URL}/login?token=${token}`)
+        .then((response) => {
+          console.log("Token verified:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error verifying token:", error);
+        });
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
