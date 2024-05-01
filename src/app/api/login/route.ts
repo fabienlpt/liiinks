@@ -50,9 +50,18 @@ export async function POST(request: Request) {
 
 export const GET = async (request: Request) => {
   try {
-    const data = await request.json();
-    const token = data.token;
+    const token = request.url.includes("?")
+      ? request.url.split("?")[1].split("=")[1]
+      : null;
 
+    if (!token) {
+      return new Response("Token non fourni", {
+        status: 403,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
     const decoded = jwt.verify(token, "shhhhh") as JwtPayload;
     const { expirationDate, email } = decoded;
 
