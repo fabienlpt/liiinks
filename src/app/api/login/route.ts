@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const token = makeToken(email);
 
     const params = {
-      link: `http://localhost:3000/login?token=${token}`,
+      link: process.env.NEXT_PUBLIC_APP_URL + "/login?token=" + token,
     };
 
     await mailerService.sendEmail(

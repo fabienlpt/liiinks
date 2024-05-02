@@ -8,7 +8,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ isConnected }) => {
   return (
     <header className="bg-gray-800 text-white w-[80%] rounded-full">
-      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+      <div className="container mx-auto flex items-center justify-between py-6 px-10">
         <h1 className="text-xl font-bold">
           <a href="/" className="hover:text-gray-400">
             Liiinks

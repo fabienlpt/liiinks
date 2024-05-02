@@ -1,6 +1,5 @@
 "use client";
 import axios from "axios";
-import { API_URL } from "../environment";
 import { useEffect, useState } from "react";
 import Header from "@/components/header";
 
@@ -14,7 +13,7 @@ export default function SignUpPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const body = { email };
-    await axios.post(`${API_URL}/login`, body);
+    await axios.post(process.env.NEXT_PUBLIC_API_URL + "/login", body);
   };
 
   useEffect(() => {
@@ -22,7 +21,7 @@ export default function SignUpPage() {
     const token = urlParams.get("token");
     if (token) {
       axios
-        .get(`${API_URL}/login?token=${token}`)
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/login?token=${token}`)
         .then((response) => {
           console.log("Token verified:", response.data);
         })
@@ -38,7 +37,7 @@ export default function SignUpPage() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Créer un compte
+            Connexion
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

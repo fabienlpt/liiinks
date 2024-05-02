@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
-import { API_URL } from "../environment";
 import Header from "@/components/header";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -20,7 +21,8 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axios.post(`${API_URL}/user`, formData);
+    const endpoint = process.env.NEXT_PUBLIC_API_URL + "/user";
+    await axios.post(endpoint, formData);
   };
 
   return (
