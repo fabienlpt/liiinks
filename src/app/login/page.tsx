@@ -1,12 +1,12 @@
 "use client";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import Header from "@/components/header";
 import { AuthContext } from "@/lib/AuthContext";
+import { redirect } from "next/navigation";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
-  const { login, error, emailSent } = useContext(AuthContext);
+  const { login, error, emailSent, user } = useContext(AuthContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -19,23 +19,14 @@ export default function SignUpPage() {
   };
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
-    if (token) {
-      axios
-        .get(`/api/login?token=${token}`)
-        .then((response) => {
-          console.log("Token verified:", response.data);
-        })
-        .catch((error) => {
-          console.error("Error verifying token:", error);
-        });
+    if (user) {
+      redirect("/myaccount");
     }
-  }, []);
+  }, [user]);
 
   return (
     <div className="flex min-h-screen flex-col items-center p-24">
-      <Header isConnected={false} />
+      <Header />
       <div className="max-w-md w-full space-y-8">
         <div className="flex flex-col items-center">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">

@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Header from "@/components/header";
 import dotenv from "dotenv";
+import { AuthContext } from "@/lib/AuthContext";
+import { redirect } from "next/navigation";
 dotenv.config();
 
 export default function SignUpPage() {
@@ -10,6 +12,8 @@ export default function SignUpPage() {
     username: "",
     email: "",
   });
+
+  const { register, user } = useContext(AuthContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -21,12 +25,19 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axios.post("/api/user", formData);
+
+    register(formData);
   };
+
+  useEffect(() => {
+    if (user) {
+      redirect("/myaccount");
+    }
+  }, [user]);
 
   return (
     <div className="flex min-h-screen flex-col items-center p-24">
-      <Header isConnected={false} />
+      <Header />
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
