@@ -2,10 +2,6 @@ import fs from "fs";
 import * as path from "path";
 import { EnumMailTemplate } from "./models/mail-template.enum";
 import nodeMailer from "nodemailer";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export class MailerService {
   transport = nodeMailer.createTransport({
@@ -57,7 +53,7 @@ export class MailerService {
    */
   private getEmailTemplate(enumMailTemplate: EnumMailTemplate): string {
     const template = fs.readFileSync(
-      path.join(__dirname, `./templates/${enumMailTemplate}`),
+      path.join(process.cwd(), `./src/mailer/templates/${enumMailTemplate}`),
       {
         encoding: "utf-8",
       }
