@@ -31,3 +31,7 @@ body {
     text-wrap: balance;
   }
 }
+
+* {
+  font-family: "Open Sans, sans-serif";
+}

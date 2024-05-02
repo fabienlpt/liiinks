@@ -1,4 +1,9 @@
-import { base } from "../config";
+import { MailerService } from "@/mailer/mailer.service";
+import { base, makeToken } from "../config";
+import {
+  EnumMailTemplate,
+  getMailSubject,
+} from "@/mailer/models/mail-template.enum";
 
 export async function GET(request: Request) {
   try {
@@ -34,6 +39,22 @@ export async function POST(request: Request) {
     const records = await base("users").create(data);
 
     const responseBody = JSON.stringify(records);
+
+    const mailerService = new MailerService();
+
+    const token = makeToken(data.email);
+
+    const params = {
+      link: process.env.NEXT_PUBLIC_APP_URL + "/login?token=" + token,
+      username: data.username,
+    };
+
+    await mailerService.sendEmail(
+      EnumMailTemplate.Create_account_ok,
+      data.email,
+      getMailSubject(EnumMailTemplate.Create_account_ok),
+      params
+    );
     return new Response(responseBody, {
       status: 201,
       headers: {
