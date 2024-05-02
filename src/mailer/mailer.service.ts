@@ -28,7 +28,7 @@ export class MailerService {
     const emailHtml = this.getEmailHtml(emailTemplate, variables);
 
     const mailOptions = {
-      from: "Fabien Lapert <no.reply.liiinks@gmail.com>",
+      from: "NO REPLY - LIIINKS <no.reply.liiinks@gmail.com>",
       to,
       subject,
       html: emailHtml,
