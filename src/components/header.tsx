@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         </h1>
         <nav className="flex items-center space-x-4">
           {user ? (
-            <Link href="/account" className="hover:text-gray-400">
+            <Link href="/myaccount" className="hover:text-gray-400">
               Compte
             </Link>
           ) : (
