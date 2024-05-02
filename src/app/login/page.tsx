@@ -1,10 +1,12 @@
 "use client";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "@/components/header";
+import { AuthContext } from "@/lib/AuthContext";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
+  const { login, error, emailSent } = useContext(AuthContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -12,8 +14,8 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const body = { email };
-    await axios.post("/api/login", body);
+
+    login(email);
   };
 
   useEffect(() => {
@@ -35,10 +37,14 @@ export default function SignUpPage() {
     <div className="flex min-h-screen flex-col items-center p-24">
       <Header isConnected={false} />
       <div className="max-w-md w-full space-y-8">
-        <div>
+        <div className="flex flex-col items-center">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Connexion
           </h2>
+          <span className="text-red-500">{error}</span>
+          {emailSent && (
+            <span className="text-green-500">Un email vous a été envoyé</span>
+          )}
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
