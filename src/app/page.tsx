@@ -3,7 +3,7 @@ import Header from "@/components/header";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      <Header isConnected={false} />
+      <Header />
       <section className="mt-10 text-center">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">
           Bienvenue sur Liiinks !

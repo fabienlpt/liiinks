@@ -1,32 +1,32 @@
-import React from "react";
+"use client";
+import { AuthContext } from "@/lib/AuthContext";
+import Link from "next/link";
+import React, { useContext } from "react";
 import { FaBars } from "react-icons/fa";
 
-interface HeaderProps {
-  isConnected: boolean;
-}
-
-const Header: React.FC<HeaderProps> = ({ isConnected }) => {
+const Header: React.FC = () => {
+  const { user } = useContext(AuthContext);
   return (
     <header className="bg-gray-800 text-white w-[80%] rounded-full">
       <div className="container mx-auto flex items-center justify-between py-6 px-10">
         <h1 className="text-xl font-bold">
-          <a href="/" className="hover:text-gray-400">
+          <Link href="/" className="hover:text-gray-400">
             Liiinks
-          </a>
+          </Link>
         </h1>
         <nav className="flex items-center space-x-4">
-          {isConnected ? (
-            <a href="/account" className="hover:text-gray-400">
+          {user ? (
+            <Link href="/account" className="hover:text-gray-400">
               Compte
-            </a>
+            </Link>
           ) : (
             <>
-              <a href="/login" className="hover:text-gray-400">
+              <Link href="/login" className="hover:text-gray-400">
                 Login
-              </a>
-              <a href="/signup" className="hover:text-gray-400">
+              </Link>
+              <Link href="/signup" className="hover:text-gray-400">
                 Signup
-              </a>
+              </Link>
             </>
           )}
         </nav>
