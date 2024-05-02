@@ -1,30 +1,30 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { base, transport, emailTemplate, makeToken } from "../config";
+import { base, makeToken } from "../config";
+import { MailerService } from "@/mailer/mailer.service";
+import {
+  EnumMailTemplate,
+  getMailSubject,
+} from "@/mailer/models/mail-template.enum";
 
 export async function POST(request: Request) {
   try {
     const data = await request.json();
     const email = data.email;
 
+    const mailerService = new MailerService();
+
     const token = makeToken(email);
 
-    const mailOptions = {
-      from: "Fabien Lapert <no.reply.liiinks@gmail.com>",
-      to: email,
-      subject: "Your Magic Link",
-      html: emailTemplate(`http://localhost:3000/login?token=${token}`),
+    const params = {
+      link: `http://localhost:3000/login?token=${token}`,
     };
 
-    await new Promise((resolve, reject) => {
-      transport.sendMail(mailOptions, (error) => {
-        if (error) {
-          console.error("Erreur lors de l'envoi de l'e-mail :", error);
-          reject(error);
-        } else {
-          resolve(true);
-        }
-      });
-    });
+    await mailerService.sendEmail(
+      EnumMailTemplate.Magic_link,
+      email,
+      getMailSubject(EnumMailTemplate.Magic_link),
+      params
+    );
     return new Response("Magic link sent.", {
       status: 200,
       headers: {
