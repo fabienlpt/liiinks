@@ -7,7 +7,15 @@ import {
 
 export async function GET(request: Request) {
   try {
-    const records = await base("users").select({}).all();
+    const username = request.url.includes("?")
+      ? request.url.split("?")[1].split("=")[1]
+      : null;
+
+    const records = await base("users")
+      .select({
+        filterByFormula: `{username} = "${username}"`,
+      })
+      .all();
 
     const responseBody = JSON.stringify(records);
     return new Response(responseBody, {

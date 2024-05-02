@@ -11,6 +11,21 @@ export async function POST(request: Request) {
     const data = await request.json();
     const email = data.email;
 
+    let users = await base("users")
+      .select({
+        filterByFormula: `{email} = "${email}"`,
+      })
+      .all();
+
+    if (users.length === 0) {
+      return new Response("Cet email n'est relié à aucun compte", {
+        status: 404,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+
     const mailerService = new MailerService();
 
     const token = makeToken(email);
