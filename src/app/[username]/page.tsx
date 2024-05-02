@@ -17,11 +17,26 @@ interface User {
   linkedIn: string;
   behance: string;
   instagram: string;
-  firstLink: string;
-  secondLink: string;
-  thirdLink: string;
-  fourthLink: string;
-  fifthLink: string;
+  firstLink: {
+    label: string;
+    url: string;
+  };
+  secondLink: {
+    label: string;
+    url: string;
+  };
+  thirdLink: {
+    label: string;
+    url: string;
+  };
+  fourthLink: {
+    label: string;
+    url: string;
+  };
+  fifthLink: {
+    label: string;
+    url: string;
+  };
 }
 
 export default function Page({ params }: { params: { username: string } }) {
@@ -55,19 +70,19 @@ export default function Page({ params }: { params: { username: string } }) {
             <div>
               <h1>Réseaux sociaux</h1>
               <ul>
-                {user.twitter && <li>Twitter: {user.twitter}</li>}
+                {user.twitter && <li className="border border-black rounded-lg border-solid border-opacity-100 border-width-1 mb-2">Twitter: {user.twitter}</li>}
                 {user.facebook && <li>Facebook: {user.facebook}</li>}
                 {user.linkedIn && <li>LinkedIn: {user.linkedIn}</li>}
                 {user.behance && <li>Behance: {user.behance}</li>}
                 {user.instagram && <li>Instagram: {user.instagram}</li>}
               </ul>
               <h1>Autres Liens</h1>
-              <ul>
-                {user.firstLink && <li>First Link: {user.firstLink}</li>}
-                {user.secondLink && <li>Second Link: {user.secondLink}</li>}
-                {user.thirdLink && <li>Third Link: {user.thirdLink}</li>}
-                {user.fourthLink && <li>Fourth Link: {user.fourthLink}</li>}
-                {user.fifthLink && <li>Fifth Link: {user.fifthLink}</li>}
+              <ul className="">
+                {user.firstLink && <li className="bg-white border border-black rounded-xl border-solid border-opacity-100 border-width-1 mb-4"> <a href={user.firstLink.url}> {user.firstLink.label} </a></li>}
+                {user.secondLink && <li> <a href={user.secondLink.url}> {user.secondLink.label} </a> </li>}
+                {user.thirdLink && <li> <a href={user.thirdLink.url}>{user.thirdLink.label} </a></li>}
+                {user.fourthLink && <li> <a href={user.fourthLink.url}>{user.fourthLink.label} </a> </li>}
+                {user.fifthLink && <li> <a href={user.fourthLink.url}>{user.fifthLink.label} </a></li>}
               </ul>
             </div>
           </div>
