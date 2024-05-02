@@ -13,7 +13,7 @@ export default function SignUpPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const body = { email };
-    await axios.post(process.env.NEXT_PUBLIC_API_URL + "/login", body);
+    await axios.post("/api/login", body);
   };
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function SignUpPage() {
     const token = urlParams.get("token");
     if (token) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/login?token=${token}`)
+        .get(`/api/login?token=${token}`)
         .then((response) => {
           console.log("Token verified:", response.data);
         })

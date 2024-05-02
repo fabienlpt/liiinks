@@ -21,8 +21,7 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const endpoint = process.env.NEXT_PUBLIC_API_URL + "/user";
-    await axios.post(endpoint, formData);
+    await axios.post("/api/user", formData);
   };
 
   return (
