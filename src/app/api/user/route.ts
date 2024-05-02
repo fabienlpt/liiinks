@@ -16,13 +16,15 @@ export async function GET(request: Request) {
         filterByFormula: `{username} = "${username}"`,
       })
       .all();
+    let user = null;
 
-    const responseBody = JSON.stringify(records);
-    return new Response(responseBody, {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
+    records.forEach((value) => {
+      user = value.fields;
+      user.id = value.getId();
+    });
+
+    return Response.json({
+      user,
     });
   } catch (error) {
     console.error(
