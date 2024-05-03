@@ -1,6 +1,7 @@
 "use client";
 import Header from "@/components/header";
 import axios from "axios";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -80,21 +81,25 @@ export default function Page({ params }: { params: { username: string } }) {
           <div className="max-w-md w-full space-y-8">
             <div className="flex flex-col items-center justify-center">
               {user.avatar ? (
-                <img
-                  src={user.avatar}
+                <Image
+                  src={"/" + user.avatar}
                   alt="Avatar"
-                  className="w-20 h-20 rounded-full"
+                  className="w-24 h-24 rounded-full"
+                  width={96}
+                  height={96}
                 />
               ) : (
-                <div className="w-20 h-20 flex items-center justify-center bg-[#F8F7F0] border border-black rounded-full">
+                <div className="w-24 h-24 flex items-center justify-center bg-[#F8F7F0] border border-[#3B3B3B] mb-4 rounded-full">
                   <span className="text-3xl text-gray-600">
                     {user.username.charAt(0).toUpperCase()}
                   </span>
                 </div>
               )}
 
-              {user.username && <p>{user.username}</p>}
-              {user.bio && <p>{user.bio}</p>}
+              {user.username && (
+                <p className="font-bold text-xl">{user.username}</p>
+              )}
+              {user.bio && <p className="text-lg mb-4">{user.bio}</p>}
               <div>
                 <h1>Réseaux sociaux</h1>
                 <ul>
