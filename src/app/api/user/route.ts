@@ -16,11 +16,58 @@ export async function GET(request: Request) {
         filterByFormula: `{username} = "${username}"`,
       })
       .all();
-    let user = null;
+    let user: any = null;
 
     records.forEach((value) => {
       user = value.fields;
+      user.links = [];
+      user.socialMedias = [];
       user.id = value.getId();
+
+      const socialMediasColumns = [
+        "twitter",
+        "facebook",
+        "behance",
+        "instagram",
+        "linkedIn",
+      ];
+
+      socialMediasColumns.forEach((columnName) => {
+        const columnValue = user[columnName];
+        if (columnValue) {
+          try {
+            const linkObject = JSON.parse(columnValue);
+            user.socialMedias.push(linkObject);
+          } catch (error) {
+            console.error(
+              `Erreur lors de l'analyse de la colonne ${columnName} en tant qu'objet JSON :`,
+              error
+            );
+          }
+        }
+      });
+
+      const linksColumns = [
+        "firstLink",
+        "secondLink",
+        "thirdLink",
+        "fourthLink",
+        "fifthLink",
+      ];
+      linksColumns.forEach((columnName) => {
+        const columnValue = user[columnName];
+        if (columnValue) {
+          try {
+            const linkObject = JSON.parse(columnValue);
+            user.links.push(linkObject);
+          } catch (error) {
+            console.error(
+              `Erreur lors de l'analyse de la colonne ${columnName} en tant qu'objet JSON :`,
+              error
+            );
+          }
+        }
+      });
     });
 
     return Response.json({
