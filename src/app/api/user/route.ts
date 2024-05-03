@@ -7,14 +7,71 @@ import {
 
 export async function GET(request: Request) {
   try {
-    const records = await base("users").select({}).all();
+    const username = request.url.includes("?")
+      ? request.url.split("?")[1].split("=")[1]
+      : null;
 
-    const responseBody = JSON.stringify(records);
-    return new Response(responseBody, {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const records = await base("users")
+      .select({
+        filterByFormula: `{username} = "${username}"`,
+      })
+      .all();
+    let user: any = null;
+
+    records.forEach((value) => {
+      user = value.fields;
+      user.links = [];
+      user.socialMedias = [];
+      user.id = value.getId();
+
+      const socialMediasColumns = [
+        "twitter",
+        "facebook",
+        "behance",
+        "instagram",
+        "linkedIn",
+      ];
+
+      socialMediasColumns.forEach((columnName) => {
+        const columnValue = user[columnName];
+        if (columnValue) {
+          try {
+            const linkObject = JSON.parse(columnValue);
+            user.socialMedias.push(linkObject);
+          } catch (error) {
+            console.error(
+              `Erreur lors de l'analyse de la colonne ${columnName} en tant qu'objet JSON :`,
+              error
+            );
+          }
+        }
+      });
+
+      const linksColumns = [
+        "firstLink",
+        "secondLink",
+        "thirdLink",
+        "fourthLink",
+        "fifthLink",
+      ];
+      linksColumns.forEach((columnName) => {
+        const columnValue = user[columnName];
+        if (columnValue) {
+          try {
+            const linkObject = JSON.parse(columnValue);
+            user.links.push(linkObject);
+          } catch (error) {
+            console.error(
+              `Erreur lors de l'analyse de la colonne ${columnName} en tant qu'objet JSON :`,
+              error
+            );
+          }
+        }
+      });
+    });
+
+    return Response.json({
+      user,
     });
   } catch (error) {
     console.error(
