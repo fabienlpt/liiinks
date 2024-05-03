@@ -78,11 +78,23 @@ export default function Page({ params }: { params: { username: string } }) {
           <div>Loading...</div>
         ) : user ? (
           <div className="max-w-md w-full space-y-8">
-            <div>
-              <h1>Profil</h1>
-              {user.avatar && <img src={user.avatar} alt="Avatar" />}
-              {user.username && <p>Username: {user.username}</p>}
-              {user.bio && <p>Bio: {user.bio}</p>}
+            <div className="flex flex-col items-center justify-center">
+              {user.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt="Avatar"
+                  className="w-20 h-20 rounded-full"
+                />
+              ) : (
+                <div className="w-20 h-20 flex items-center justify-center bg-[#F8F7F0] border border-black rounded-full">
+                  <span className="text-3xl text-gray-600">
+                    {user.username.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+              )}
+
+              {user.username && <p>{user.username}</p>}
+              {user.bio && <p>{user.bio}</p>}
               <div>
                 <h1>Réseaux sociaux</h1>
                 <ul>
