@@ -14,31 +14,6 @@ interface User {
   backgroundGradient: string;
   fontChoice: string;
   avatar: string;
-  twitter: string;
-  facebook: string;
-  linkedIn: string;
-  behance: string;
-  instagram: string;
-  firstLink: {
-    label: string;
-    url: string;
-  };
-  secondLink: {
-    label: string;
-    url: string;
-  };
-  thirdLink: {
-    label: string;
-    url: string;
-  };
-  fourthLink: {
-    label: string;
-    url: string;
-  };
-  fifthLink: {
-    label: string;
-    url: string;
-  };
   socialMedias: Array<{ label: string; url: string }>;
   links: Array<{ label: string; url: string }>;
 }
@@ -47,7 +22,8 @@ export default function Page({ params }: { params: { username: string } }) {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User | null>(null);
   const [background, setBackground] = useState<string>("#F8F7F0");
-  const [color, setColor] = useState<string>("#000000");
+  const [color, setColor] = useState<string>("#3C3C3C");
+  const [fontFamily, setFontFamily] = useState<string>("Arial");
 
   useEffect(() => {
     if (params.username) {
@@ -65,12 +41,15 @@ export default function Page({ params }: { params: { username: string } }) {
     if (user) {
       setBackground(user.backgroundGradient);
       setColor(user.mainColor);
-      document.body.style.fontFamily = user.fontChoice;
+      setFontFamily(user.fontChoice);
     }
   }, [user]);
 
   return (
-    <div className="min-h-screen pl-8 pt-4" style={{ background, color }}>
+    <div
+      className="min-h-screen pl-8 pt-4"
+      style={{ background, color, fontFamily }}
+    >
       <Link href="/" className="hover:text-gray-400">
         Liiinks
       </Link>
@@ -82,7 +61,7 @@ export default function Page({ params }: { params: { username: string } }) {
             <div className="flex flex-col items-center justify-center">
               {user.avatar ? (
                 <Image
-                  src={"/" + user.avatar}
+                  src={user.avatar}
                   alt="Avatar"
                   className="w-24 h-24 rounded-full"
                   width={96}
@@ -103,69 +82,22 @@ export default function Page({ params }: { params: { username: string } }) {
               <div>
                 <h1>Réseaux sociaux</h1>
                 <ul>
-                  {user.links.map((link) => (
-                    <li
-                      key={link.label}
-                      className="border border-black rounded-lg border-solid border-opacity-100 border-width-1 mb-2"
-                    >
-                      <a href={link.url}>{link.label}</a>
-                    </li>
-                  ))}
                   {user.socialMedias.map((link) => (
                     <li
                       key={link.label}
-                      className="border border-black rounded-lg border-solid border-opacity-100 border-width-1 mb-2"
+                      className="border border-black rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-60 h-20 bg-white bg-opacity-20"
                     >
                       <a href={link.url}>{link.label}</a>
                     </li>
                   ))}
-                  {/* {user.twitter && (
-                    <li className="border border-black rounded-lg border-solid border-opacity-100 border-width-1 mb-2">
-                      Twitter: {user.twitter}
+                  {user.links.map((link) => (
+                    <li
+                      key={link.label}
+                      className="border border-black rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-60 h-20"
+                    >
+                      <a href={link.url}>{link.label}</a>
                     </li>
-                  )}
-                  {user.facebook && <li>Facebook: {user.facebook}</li>}
-                  {user.linkedIn && <li>LinkedIn: {user.linkedIn}</li>}
-                  {user.behance && <li>Behance: {user.behance}</li>}
-                  {user.instagram && <li>Instagram: {user.instagram}</li>}
-                </ul>
-                <h1>Autres Liens</h1>
-                <ul className="">
-                  {user.firstLink && (
-                    <li className="bg-white border border-black rounded-xl border-solid border-opacity-100 border-width-1 mb-4">
-                      {" "}
-                      <a href={user.firstLink.url}> {user.firstLink.label} </a>
-                    </li>
-                  )}
-                  {user.secondLink && (
-                    <li>
-                      {" "}
-                      <a href={user.secondLink.url}>
-                        {" "}
-                        {user.secondLink.label}{" "}
-                      </a>{" "}
-                    </li>
-                  )}
-                  {user.thirdLink && (
-                    <li>
-                      {" "}
-                      <a href={user.thirdLink.url}>{user.thirdLink.label} </a>
-                    </li>
-                  )}
-                  {user.fourthLink && (
-                    <li>
-                      {" "}
-                      <a href={user.fourthLink.url}>
-                        {user.fourthLink.label}{" "}
-                      </a>{" "}
-                    </li>
-                  )}
-                  {user.fifthLink && (
-                    <li>
-                      {" "}
-                      <a href={user.fourthLink.url}>{user.fifthLink.label} </a>
-                    </li>
-                  )} */}
+                  ))}
                 </ul>
               </div>
             </div>
