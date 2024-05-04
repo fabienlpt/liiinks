@@ -9,12 +9,12 @@ export default function MyAccount() {
   const [mainColor, setMainColor] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("");
   const [fontChoice, setFontChoice] = useState("");
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState<File | null>(null);
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: any) {
     e.preventDefault();
     let formData = new FormData();
-    formData.append("userId", user?.id);
+    formData.append("userId", user?.id ?? "");
     formData.append("mainColor", mainColor);
     formData.append("backgroundColor", backgroundColor);
     formData.append("fontChoice", fontChoice);
@@ -77,7 +77,7 @@ export default function MyAccount() {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => setAvatar(e.target.files[0])}
+                  onChange={(e) => setAvatar(e.target.files?.[0] ?? null)}
                 />
               </label>
             </div>
