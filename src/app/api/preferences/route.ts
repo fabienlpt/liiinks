@@ -33,7 +33,11 @@ export async function POST(request: Request) {
       }
 
       // enregistrer le nouvel avatar
-      const avatarDir = path.join(process.cwd(), "public", "avatars");
+      const publicDir = path.join(process.cwd(), "public");
+      if (!fs.existsSync(publicDir)) {
+        fs.mkdirSync(publicDir, { recursive: true });
+      }
+      const avatarDir = path.join(publicDir, "avatars");
       if (!fs.existsSync(avatarDir)) {
         fs.mkdirSync(avatarDir, { recursive: true });
       }
