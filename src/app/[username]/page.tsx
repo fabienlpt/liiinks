@@ -1,22 +1,11 @@
 "use client";
 import Header from "@/components/header";
+import { User } from "@/lib/user.model";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
-interface User {
-  username: string;
-  email: string;
-  bio: string;
-  mainColor: string;
-  backgroundGradient: string;
-  fontChoice: string;
-  avatar: string;
-  socialMedias: Array<{ label: string; url: string }>;
-  links: Array<{ label: string; url: string }>;
-}
 
 export default function Page({ params }: { params: { username: string } }) {
   const [loading, setLoading] = useState<boolean>(true);
