@@ -53,7 +53,7 @@ export default function Page({ params }: { params: { username: string } }) {
       <Link href="/" className="hover:text-gray-400">
         Liiinks
       </Link>
-      <div className="flex flex-col items-center p-24">
+      <div className="flex flex-col items-center p-15">
         {loading ? (
           <div>Loading...</div>
         ) : user ? (
@@ -63,7 +63,8 @@ export default function Page({ params }: { params: { username: string } }) {
                 <Image
                   src={user.avatar}
                   alt="Avatar"
-                  className="w-24 h-24 rounded-full"
+                  className="w-24 h-24 rounded-full "
+                  style={{ border: "1px solid " + color }}
                   width={96}
                   height={96}
                 />
@@ -78,25 +79,30 @@ export default function Page({ params }: { params: { username: string } }) {
               {user.username && (
                 <p className="font-bold text-xl">{user.username}</p>
               )}
-              {user.bio && <p className="text-lg mb-4">{user.bio}</p>}
+              {user.bio && <p className="text-lg mb-4 italic">{user.bio}</p>}
               <div>
-                <h1>Réseaux sociaux</h1>
                 <ul>
                   {user.socialMedias.map((link) => (
-                    <li
-                      key={link.label}
-                      className="border border-black rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-60 h-20 bg-white bg-opacity-20"
-                    >
-                      <a href={link.url}>{link.label}</a>
-                    </li>
+                    <a key={link.label} href={link.url} className="mb-2 block">
+                      <li
+                        key={link.label}
+                        className="hover:bg-white hover:bg-opacity-[0.1] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
+                        style={{ border: "1px solid " + color }}
+                      >
+                        {link.label}
+                      </li>
+                    </a>
                   ))}
                   {user.links.map((link) => (
-                    <li
-                      key={link.label}
-                      className="border border-black rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-60 h-20"
-                    >
-                      <a href={link.url}>{link.label}</a>
-                    </li>
+                    <a key={link.label} href={link.url} className="mb-2 block">
+                      <li
+                        key={link.label}
+                        className="hover:bg-white hover:bg-opacity-[0.1] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
+                        style={{ border: "1px solid " + color }}
+                      >
+                        {link.label}
+                      </li>
+                    </a>
                   ))}
                 </ul>
               </div>
