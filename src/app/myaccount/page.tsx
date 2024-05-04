@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import { AuthContext } from "@/lib/AuthContext";
 import axios from "axios";
 import { useContext, useState } from "react";
+import ColorPicker from "react-best-gradient-color-picker";
 
 export default function MyAccount() {
   const { user } = useContext(AuthContext);
@@ -36,11 +37,20 @@ export default function MyAccount() {
           <div className="grid grid-cols-2 gap-4">
             <div className="flex gap-4">
               <label>
-                <p>Couleur principale</p>
-                <input
-                  type="color"
+                <p>Couleur de texte</p>
+
+                <ColorPicker
                   value={mainColor}
-                  onChange={(e) => setMainColor(e.target.value)}
+                  onChange={setMainColor}
+                  hideInputs
+                  hideEyeDrop
+                  hideOpacity
+                  hideInputType
+                  hideAdvancedSliders
+                  hideColorGuide
+                  hideGradientControls
+                  hidePresets
+                  hideControls
                 />
               </label>
             </div>
@@ -48,10 +58,17 @@ export default function MyAccount() {
             <div className="flex gap-4">
               <label>
                 <p>Couleur de fond</p>
-                <input
-                  type="color"
+                <ColorPicker
                   value={backgroundColor}
-                  onChange={(e) => setBackgroundColor(e.target.value)}
+                  onChange={setBackgroundColor}
+                  hideInputs
+                  hideEyeDrop
+                  hideOpacity
+                  hideInputType
+                  hideAdvancedSliders
+                  hideColorGuide
+                  hideGradientControls
+                  hidePresets
                 />
               </label>
             </div>
