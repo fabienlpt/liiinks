@@ -6,19 +6,19 @@ export async function POST(request: Request) {
 
     const userId = data.get("userId");
     const mainColor = data.get("mainColor");
-    const backgroundColor = data.get("backgroundColor");
+    const backgroundGradient = data.get("backgroundColor");
     const fontChoice = data.get("fontChoice");
     const avatar = data.get("avatar");
 
     const fieldsToUpdate = {
       mainColor,
-      backgroundColor,
+      backgroundGradient,
       fontChoice,
+      avatar: "",
     };
 
     if (avatar) {
       const avatarUrl = "";
-
       fieldsToUpdate.avatar = avatarUrl;
     }
 
