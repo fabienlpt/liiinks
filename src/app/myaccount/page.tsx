@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import ColorPicker from "react-best-gradient-color-picker";
+import { FaEdit } from "react-icons/fa";
 
 export default function MyAccount() {
   const { user } = useContext(AuthContext);
@@ -100,26 +101,7 @@ export default function MyAccount() {
                 {renderAvatar()}
                 {isHovered && (
                   <div className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-gray-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15.293 4.293a1 1 0 011.414 0l3 3a1 1 0 01.211.281l2 5a1 1 0 01-1.237 1.237l-5-2a1 1 0 01-.281-.211l-3-3a1 1 0 010-1.414l6-6a1 1 0 011.414 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 15l-2 6 6-2 9-9-4-4-9 9zM15 3a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
+                    <FaEdit className="text-2xl" />
                   </div>
                 )}
               </div>
