@@ -7,11 +7,11 @@ import { useContext } from "react";
 export default function Links() {
   const { user } = useContext(AuthContext);
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: any) {
     e.preventDefault();
     let inputs = Array.from(e.target.querySelectorAll("input"));
-    let data = [];
-    inputs.forEach((input) => {
+    let data: any = [];
+    inputs.forEach((input: any) => {
       let split = input.name.split("-");
       let name = split[1];
       let link = split[0];
@@ -26,7 +26,7 @@ export default function Links() {
     });
 
     let toSend = {
-      id: user?.id,
+      id: user?.id ?? "",
       fields: Object.values(data),
     };
 

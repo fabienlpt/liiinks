@@ -6,37 +6,31 @@ export async function POST(request: Request) {
   );
   try {
     const data = await request.formData();
-    const links = JSON.parse(data.get("links"));
+    const links = JSON.parse(data.get("links") as string);
 
     const id = links.id;
-    let fields = {};
+    let fields: { [key: string]: string } = {};
 
-    links.fields.forEach((item) => {
-      fields[item.name] = JSON.stringify({ label: item.label, url: item.url });
-    });
+    links.fields.forEach(
+      (item: { name: string; label: string; url: string }) => {
+        fields[item.name] = JSON.stringify({
+          label: item.label,
+          url: item.url,
+        });
+      }
+    );
 
-    let records = await base("users").update([
+    const updatedRecords = await base("users").update([
       {
         id,
         fields,
       },
     ]);
 
-    let users = await base("users")
-      .select({
-        filterByFormula: "{username} = '" + user.username + "'",
-      })
-      .all();
-
-    let user = null;
-
-    users.forEach((value) => {
-      user = value.fields;
-      user.id = value.getId();
-    });
+    const updatedUser = updatedRecords[0].fields;
 
     return Response.json({
-      user,
+      user: updatedUser,
     });
   } catch (error) {
     console.log(error);
