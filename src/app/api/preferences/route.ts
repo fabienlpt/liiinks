@@ -1,4 +1,6 @@
 import { base } from "../config";
+import fs from "fs";
+import path from "path";
 
 export async function POST(request: Request) {
   try {
@@ -8,7 +10,7 @@ export async function POST(request: Request) {
     const mainColor = data.get("mainColor");
     const backgroundGradient = data.get("backgroundColor");
     const fontChoice = data.get("fontChoice");
-    const avatar = data.get("avatar");
+    const avatarFile = data.get("avatar");
 
     const fieldsToUpdate = {
       mainColor,
@@ -17,8 +19,18 @@ export async function POST(request: Request) {
       avatar: "",
     };
 
-    if (avatar) {
-      const avatarUrl = "";
+    if (avatarFile) {
+      const avatarDir = path.join(process.cwd(), "public", "avatars");
+      if (!fs.existsSync(avatarDir)) {
+        fs.mkdirSync(avatarDir, { recursive: true });
+      }
+      const avatarFileName = `${userId}-${Date.now()}-${avatarFile.name}`;
+      const avatarFilePath = path.join(avatarDir, avatarFileName);
+      await fs.promises.writeFile(
+        avatarFilePath,
+        Buffer.from(await avatarFile.arrayBuffer())
+      );
+      const avatarUrl = `/avatars/${avatarFileName}`;
       fieldsToUpdate.avatar = avatarUrl;
     }
 
