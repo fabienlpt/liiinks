@@ -12,10 +12,11 @@ import { FaEdit } from "react-icons/fa";
 export default function MyAccount() {
   const { user } = useContext(AuthContext);
 
+  const [avatar, setAvatar] = useState<File | null>(null);
+  const [bio, setBio] = useState("");
   const [mainColor, setMainColor] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("");
   const [fontChoice, setFontChoice] = useState("");
-  const [avatar, setAvatar] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -23,6 +24,7 @@ export default function MyAccount() {
     e.preventDefault();
     let formData = new FormData();
     formData.append("userId", user?.id ?? "");
+    formData.append("bio", bio);
     formData.append("mainColor", mainColor);
     formData.append("backgroundColor", backgroundColor);
     formData.append("fontChoice", fontChoice);
@@ -37,6 +39,7 @@ export default function MyAccount() {
       setMainColor(user.mainColor);
       setBackgroundColor(user.backgroundGradient);
       setFontChoice(user.fontChoice);
+      setBio(user.bio);
       setAvatarPreview(user.avatar);
     }
   }, [user]);
@@ -81,7 +84,7 @@ export default function MyAccount() {
           <Preview
             avatar={avatarPreview ?? user.avatar}
             username={user.username}
-            bio={user.bio}
+            bio={bio}
             socialMedias={user.socialMedias}
             links={user.links}
             color={mainColor}
@@ -137,6 +140,15 @@ export default function MyAccount() {
                 onChange={onSelectImage}
                 style={{ display: "none" }}
               />
+
+              <label className="flex gap-4 flex-col items-center">
+                <p>Bio</p>
+                <textarea
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                  className="w-full border"
+                />
+              </label>
 
               <label className="flex gap-4 flex-col items-center">
                 <p>Police d&apos;écriture</p>
