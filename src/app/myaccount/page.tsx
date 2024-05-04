@@ -81,25 +81,19 @@ export default function MyAccount() {
 
             <label className="flex gap-4 flex-col items-center">
               <p>Avatar</p>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={onSelectImage}
-                style={{ display: "none" }}
-              />
-
               <div
                 className={`relative flex items-center justify-center rounded-full bg-gray-200 border border-[#3C3C3C] overflow-hidden ${
                   isHovered ? "hovered" : ""
                 }`}
                 style={{ width: 100, height: 100, cursor: "pointer" }}
-                onClick={() =>
+                onClick={(e) => {
+                  e.stopPropagation();
                   (
                     document.querySelector(
                       'input[type="file"]'
                     ) as HTMLInputElement
-                  ).click()
-                }
+                  ).click();
+                }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
@@ -130,6 +124,13 @@ export default function MyAccount() {
                 )}
               </div>
             </label>
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={onSelectImage}
+              style={{ display: "none" }}
+            />
 
             <label className="flex gap-4 flex-col items-center">
               <p>Police d&apos;écriture</p>
