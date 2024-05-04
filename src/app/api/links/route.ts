@@ -9,11 +9,16 @@ export async function POST(request: Request) {
     const links = JSON.parse(data.get("links") as string);
 
     const id = links.id;
-    let fields = {};
+    let fields: { [key: string]: string } = {};
 
-    links.fields.forEach((item) => {
-      fields[item.name] = JSON.stringify({ label: item.label, url: item.url });
-    });
+    links.fields.forEach(
+      (item: { name: string; label: string; url: string }) => {
+        fields[item.name] = JSON.stringify({
+          label: item.label,
+          url: item.url,
+        });
+      }
+    );
 
     const updatedRecords = await base("users").update([
       {
