@@ -61,7 +61,7 @@ export default function Page({ params }: { params: { username: string } }) {
             <div className="flex flex-col items-center justify-center">
               {user.avatar ? (
                 <Image
-                  src={"/" + user.avatar}
+                  src={user.avatar}
                   alt="Avatar"
                   className="w-24 h-24 rounded-full"
                   width={96}
@@ -82,18 +82,18 @@ export default function Page({ params }: { params: { username: string } }) {
               <div>
                 <h1>Réseaux sociaux</h1>
                 <ul>
-                  {user.links.map((link) => (
+                  {user.socialMedias.map((link) => (
                     <li
                       key={link.label}
-                      className="border border-black rounded-lg border-solid border-opacity-100 border-width-1 mb-2"
+                      className="border border-black rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-60 h-20 bg-white bg-opacity-20"
                     >
                       <a href={link.url}>{link.label}</a>
                     </li>
                   ))}
-                  {user.socialMedias.map((link) => (
+                  {user.links.map((link) => (
                     <li
                       key={link.label}
-                      className="border border-black rounded-lg border-solid border-opacity-100 border-width-1 mb-2"
+                      className="border border-black rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-60 h-20"
                     >
                       <a href={link.url}>{link.label}</a>
                     </li>

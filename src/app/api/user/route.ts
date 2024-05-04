@@ -25,11 +25,11 @@ export async function GET(request: Request) {
       user.id = value.getId();
 
       const socialMediasColumns = [
-        "twitter",
-        "facebook",
         "behance",
-        "instagram",
         "linkedIn",
+        "instagram",
+        "facebook",
+        "twitter",
       ];
 
       socialMediasColumns.forEach((columnName) => {
