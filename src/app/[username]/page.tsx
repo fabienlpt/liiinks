@@ -83,10 +83,10 @@ export default function Page({ params }: { params: { username: string } }) {
               <div>
                 <ul>
                   {user.socialMedias.map((link) => (
-                    <a key={link.label} href={link.url} className="mb-2 block">
+                    <a key={link.label} href={link.url} className="mb-4 block">
                       <li
                         key={link.label}
-                        className="hover:bg-white hover:bg-opacity-[0.1] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
+                        className="bg-white hover:scale-x-105 bg-opacity-[0.5] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
                         style={{ border: "1px solid " + color }}
                       >
                         {link.label}
@@ -94,10 +94,10 @@ export default function Page({ params }: { params: { username: string } }) {
                     </a>
                   ))}
                   {user.links.map((link) => (
-                    <a key={link.label} href={link.url} className="mb-2 block">
+                    <a key={link.label} href={link.url} className="mb-4 block">
                       <li
                         key={link.label}
-                        className="hover:bg-white hover:bg-opacity-[0.1] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
+                        className="bg-white hover:scale-x-105 bg-opacity-[0.5] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
                         style={{ border: "1px solid " + color }}
                       >
                         {link.label}
