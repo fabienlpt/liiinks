@@ -96,16 +96,30 @@ export default function MyAccount() {
         )}
       </div>
       <div className="w-[30%] bg-white rounded-xl p-4 flex flex-col items-center">
-        <Link href="/" className="hover:text-gray-400">
+        <Link href="/" className="hover:text-gray-400 text-2xl font-bold">
           Liiinks
         </Link>
-        <div className="w-[80%] bg-white rounded-xl my-12">
+        <div className="w-full bg-white rounded-xl my-12">
           <form
             onSubmit={handleSubmit}
-            className="w-2/3 bg-white rounded mx-auto"
+            className="w-full bg-white rounded mx-auto"
           >
-            <div className="flex flex-col items-center">
-              <h1 className="mb-8">Préférences</h1>
+            <div className="flex flex-col items-center w-full">
+              <div className="flex items-center justify-around w-full">
+                <Link
+                  href="/myaccount"
+                  className="hover:text-gray-400 w-1/2 text-center border border-b-0 border-l-0 rounded-t-lg p-2"
+                >
+                  Préférences
+                </Link>
+
+                <Link
+                  href="/myaccount/links"
+                  className="hover:text-gray-400 w-1/2 text-center border border-t-0 border-r-0 rounded-b-lg p-2"
+                >
+                  Mes liens
+                </Link>
+              </div>
 
               <label className="flex gap-4 flex-col items-center">
                 <p>Avatar</p>
