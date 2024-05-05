@@ -43,28 +43,34 @@ const Preview: React.FC<IProps> = ({
         {bio && <p className="text-lg mb-4 italic">{bio}</p>}
         <div>
           <ul>
-            {socialMedias.map((link) => (
-              <a key={link.label} href={link.url} className="mb-4 block">
-                <li
-                  key={link.label}
-                  className="bg-white hover:scale-x-105 bg-opacity-[0.5] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
-                  style={{ border: "1px solid " + color }}
-                >
-                  {link.label}
-                </li>
-              </a>
-            ))}
-            {links.map((link) => (
-              <a key={link.label} href={link.url} className="mb-4 block">
-                <li
-                  key={link.label}
-                  className="bg-white hover:scale-x-105 bg-opacity-[0.5] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
-                  style={{ border: "1px solid " + color }}
-                >
-                  {link.label}
-                </li>
-              </a>
-            ))}
+            {socialMedias.map(
+              (link) =>
+                link.url && (
+                  <a key={link.label} href={link.url} className="mb-4 block">
+                    <li
+                      key={link.label}
+                      className="bg-white hover:scale-x-105 bg-opacity-[0.5] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
+                      style={{ border: "1px solid " + color }}
+                    >
+                      {link.label}
+                    </li>
+                  </a>
+                )
+            )}
+            {links.map(
+              (link) =>
+                link.url && (
+                  <a key={link.label} href={link.url} className="mb-4 block">
+                    <li
+                      key={link.label}
+                      className="bg-white hover:scale-x-105 bg-opacity-[0.5] shadow-lg rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-[25rem] h-[5rem]"
+                      style={{ border: "1px solid " + color }}
+                    >
+                      {link.label}
+                    </li>
+                  </a>
+                )
+            )}
           </ul>
         </div>
       </div>
