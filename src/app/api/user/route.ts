@@ -99,7 +99,20 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const records = await base("users").create(data);
+    const user = data as any;
+
+    user.facebook = JSON.stringify({ label: "Facebook", url: "" });
+    user.twitter = JSON.stringify({ label: "Twitter", url: "" });
+    user.instagram = JSON.stringify({ label: "Instagram", url: "" });
+    user.linkedIn = JSON.stringify({ label: "LinkedIn", url: "" });
+    user.behance = JSON.stringify({ label: "Behance", url: "" });
+    user.firstLink = JSON.stringify({ label: "Lien1", url: "" });
+    user.secondLink = JSON.stringify({ label: "Lien2", url: "" });
+    user.thirdLink = JSON.stringify({ label: "Lien3", url: "" });
+    user.fourthLink = JSON.stringify({ label: "Lien4", url: "" });
+    user.fifthLink = JSON.stringify({ label: "Lien5", url: "" });
+
+    const records = await base("users").create(user);
 
     const responseBody = JSON.stringify(records);
 
