@@ -20,8 +20,8 @@ const Header: React.FC = () => {
               <Link href="/myaccount" className="hover:text-gray-400">
                 Compte
               </Link>
-              <Link href="/myaccount/links" className="hover:text-gray-400">
-                Mes liens
+              <Link href="/logout" className="hover:text-gray-400">
+                Se déconnecter
               </Link>
             </>
           ) : (
