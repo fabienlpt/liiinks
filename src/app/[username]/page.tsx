@@ -1,22 +1,9 @@
 "use client";
-import Header from "@/components/header";
+import Preview from "@/components/preview";
+import { User } from "@/lib/user.model";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
-interface User {
-  username: string;
-  email: string;
-  bio: string;
-  mainColor: string;
-  backgroundGradient: string;
-  fontChoice: string;
-  avatar: string;
-  socialMedias: Array<{ label: string; url: string }>;
-  links: Array<{ label: string; url: string }>;
-}
 
 export default function Page({ params }: { params: { username: string } }) {
   const [loading, setLoading] = useState<boolean>(true);
@@ -53,55 +40,18 @@ export default function Page({ params }: { params: { username: string } }) {
       <Link href="/" className="hover:text-gray-400">
         Liiinks
       </Link>
-      <div className="flex flex-col items-center p-24">
+      <div className="flex flex-col items-center p-15">
         {loading ? (
           <div>Loading...</div>
         ) : user ? (
-          <div className="max-w-md w-full space-y-8">
-            <div className="flex flex-col items-center justify-center">
-              {user.avatar ? (
-                <Image
-                  src={user.avatar}
-                  alt="Avatar"
-                  className="w-24 h-24 rounded-full"
-                  width={96}
-                  height={96}
-                />
-              ) : (
-                <div className="w-24 h-24 flex items-center justify-center bg-[#F8F7F0] border border-[#3B3B3B] mb-4 rounded-full">
-                  <span className="text-3xl text-gray-600">
-                    {user.username.charAt(0).toUpperCase()}
-                  </span>
-                </div>
-              )}
-
-              {user.username && (
-                <p className="font-bold text-xl">{user.username}</p>
-              )}
-              {user.bio && <p className="text-lg mb-4">{user.bio}</p>}
-              <div>
-                <h1>Réseaux sociaux</h1>
-                <ul>
-                  {user.socialMedias.map((link) => (
-                    <li
-                      key={link.label}
-                      className="border border-black rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-60 h-20 bg-white bg-opacity-20"
-                    >
-                      <a href={link.url}>{link.label}</a>
-                    </li>
-                  ))}
-                  {user.links.map((link) => (
-                    <li
-                      key={link.label}
-                      className="border border-black rounded-full border-solid border-opacity-100 border-width-1 mb-2 flex justify-center items-center w-60 h-20"
-                    >
-                      <a href={link.url}>{link.label}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
+          <Preview
+            avatar={user.avatar}
+            username={user.username}
+            bio={user.bio}
+            socialMedias={user.socialMedias}
+            links={user.links}
+            color={user.mainColor}
+          />
         ) : (
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Utilisateur non trouvé

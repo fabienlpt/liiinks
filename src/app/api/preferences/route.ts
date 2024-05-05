@@ -9,19 +9,35 @@ export async function POST(request: Request) {
 
     const userId = data.get("userId") as string;
     const mainColor = data.get("mainColor");
+    const bio = data.get("bio");
     const backgroundGradient = data.get("backgroundColor");
     const fontChoice = data.get("fontChoice");
     const avatarFile = data.get("avatar") as File;
 
     const fieldsToUpdate = {
+      bio: bio ?? "",
       mainColor: mainColor ?? "",
       backgroundGradient: backgroundGradient ?? "",
       fontChoice: fontChoice ?? "",
-      avatar: "",
     } as FieldSet;
 
     if (avatarFile) {
-      const avatarDir = path.join(process.cwd(), "public", "avatars");
+      // récupérer l'ancien avatar pour le supprimer
+      const userRecord = await base("users").find(userId);
+      const oldAvatarUrl = userRecord.fields.avatar as string;
+      if (oldAvatarUrl) {
+        const oldAvatarPath = path.join(process.cwd(), "public", oldAvatarUrl);
+        if (fs.existsSync(oldAvatarPath)) {
+          fs.unlinkSync(oldAvatarPath);
+        }
+      }
+
+      // enregistrer le nouvel avatar
+      const publicDir = path.join(process.cwd(), "public");
+      if (!fs.existsSync(publicDir)) {
+        fs.mkdirSync(publicDir, { recursive: true });
+      }
+      const avatarDir = path.join(publicDir, "avatars");
       if (!fs.existsSync(avatarDir)) {
         fs.mkdirSync(avatarDir, { recursive: true });
       }
@@ -44,7 +60,6 @@ export async function POST(request: Request) {
 
     const updatedUser = updatedRecords[0].fields;
 
-    console.log("Préférences mises à jour :", updatedUser);
     return new Response(JSON.stringify({ user: updatedUser }), {
       status: 200,
       headers: {

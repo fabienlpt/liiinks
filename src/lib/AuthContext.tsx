@@ -2,9 +2,10 @@
 import axios from "axios";
 import { redirect } from "next/navigation";
 import React, { createContext, useEffect, useState } from "react";
+import { User } from "./user.model";
 
 const AuthContext = createContext({
-  user: null as null | object,
+  user: null as null | User,
   login: (email: string) => {},
   register: (formData: object) => {},
   emailSent: false,
@@ -12,7 +13,7 @@ const AuthContext = createContext({
 });
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [emailSent, setEmailSent] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
