@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Liiinks
 
-## Getting Started
+Ce projet a été réalisé par Alyssa CHERIF, Quentin HONNART et Fabien LAPERT.
 
-First, run the development server:
+## Technologies utilisées
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Voici la liste des technologies que nous avons utilisées :
+
+- **Next.js**: Next.js est un framework JavaScript utilisé pour le développement d'applications web côté client et côté serveur. Il offre des fonctionnalités telles que le rendu côté serveur (SSR), la génération de site statique, le routage automatique, etc.
+
+- **React**: React est une bibliothèque JavaScript développée par Facebook pour la création d'interfaces utilisateur interactives. Elle permet de diviser l'interface utilisateur en composants réutilisables, simplifiant ainsi le développement et la maintenance des applications web.
+
+- **Tailwind CSS**: Tailwind CSS est un framework CSS basé sur des classes utilitaires. Il fournit un ensemble de classes prédéfinies qui peuvent être utilisées pour styliser rapidement et facilement les éléments HTML.
+
+- **Axios**: Axios est une bibliothèque JavaScript permettant de réaliser des requêtes HTTP depuis le navigateur ou Node.js. Elle simplifie la communication avec les API en fournissant une interface simple et intuitive pour envoyer des requêtes et traiter les réponses.
+
+- **Airtable**: Airtable est une plateforme de gestion de base de données en ligne qui permet de créer des bases de données relationnelles et de les gérer à l'aide d'une interface intuitive et conviviale. Elle est souvent utilisée pour stocker et gérer des données structurées dans les applications web.
+
+## Installation du projet
+
+Pour installer le projet localement, suivez les étapes ci-dessous :
+
+1. Cloner le dépôt Git :
+
+```
+git clone https://github.com/fabienlpt/liiinks.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Accéder au répertoire du projet :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+cd liiinks
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Installer les dépendances du projet à l'aide de npm ou yarn :
 
-## Learn More
+```
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+ou
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+yarn install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. Créer un fichier `.env.local` à la racine du projet et y ajouter les variables d'environnement nécessaires.
 
-## Deploy on Vercel
+```
+AIRTABLE_API_KEY
+NEXT_PUBLIC_APP_URL
+NEXT_PUBLIC_API_URL
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Démarrer le serveur de développement :
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+npm run dev
+```
+
+ou
+
+```
+yarn dev
+```
+
+6. Accéder à l'application dans votre navigateur à l'adresse [http://localhost:3000](http://localhost:3000).
+
+En suivant ces étapes, vous pourrez installer et exécuter le projet Liiinks localement sur votre machine.
