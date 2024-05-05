@@ -3,10 +3,14 @@ import Preview from "@/components/preview";
 import { AuthContext } from "@/lib/AuthContext";
 import axios from "axios";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function Links() {
   const { user } = useContext(AuthContext);
+  const [links, setLinks] = useState<{ label: string; url: string }[]>([]);
+  const [socialMedias, setSocialMedias] = useState<
+    { label: string; url: string }[]
+  >([]);
 
   async function handleSubmit(e: any) {
     e.preventDefault();
@@ -36,6 +40,13 @@ export default function Links() {
     await axios.post("/api/links", formData);
   }
 
+  useEffect(() => {
+    if (user) {
+      setLinks(user.links);
+      setSocialMedias(user.socialMedias);
+    }
+  }, [user]);
+
   return (
     <div className="min-h-screen flex">
       <div
@@ -51,8 +62,8 @@ export default function Links() {
             avatar={user.avatar}
             username={user.username}
             bio={user.bio}
-            socialMedias={user.socialMedias}
-            links={user.links}
+            socialMedias={socialMedias}
+            links={links}
             color={user.mainColor}
           />
         ) : (
