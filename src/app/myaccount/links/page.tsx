@@ -2,15 +2,19 @@
 import Header from "@/components/header";
 import { AuthContext } from "@/lib/AuthContext";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function Links() {
   const { user } = useContext(AuthContext);
 
-  async function handleSubmit(e) {
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  async function handleSubmit(e: any) {
     e.preventDefault();
     let inputs = Array.from(e.target.querySelectorAll("input"));
-    let data = [];
+    let data: any[] = [];
     inputs.forEach((input) => {
       let split = input.name.split("-");
       let name = split[1];
@@ -47,8 +51,9 @@ export default function Links() {
           <div className="grid grid-cols-2 gap-4">
             <div className="flex gap-4">
               <label>
-                <p>Label Behance</p>
+                <p>{user?.behance.label}</p>
                 <input
+                  type="hidden"
                   className="border border-black rounded-sm"
                   name="behance-label"
                   value={"Behance"}
@@ -56,17 +61,18 @@ export default function Links() {
                 />
               </label>
               <label>
-                <p>Lien Behance</p>
                 <input
                   className="border border-black rounded-sm"
                   name="behance-url"
+                  defaultValue={user?.behance.url}
                 />
               </label>
             </div>
             <div className="flex gap-4">
               <label>
-                <p>Label Facebook</p>
+                <p>{user?.facebook.label}</p>
                 <input
+                  type="hidden"
                   className="border border-black rounded-sm"
                   name="facebook-label"
                   value={"Facebook"}
@@ -74,17 +80,18 @@ export default function Links() {
                 />
               </label>
               <label>
-                <p>Lien Facebook</p>
                 <input
                   className="border border-black rounded-sm"
                   name="facebook-url"
+                  defaultValue={user?.facebook.url}
                 />
               </label>
             </div>
             <div className="flex gap-4">
               <label>
-                <p>Label Twitter</p>
+                <p>{user?.twitter.label}</p>
                 <input
+                  type="hidden"
                   className="border border-black rounded-sm"
                   name="twitter-label"
                   value={"Twitter"}
@@ -92,17 +99,18 @@ export default function Links() {
                 />
               </label>
               <label>
-                <p>Lien Twitter</p>
                 <input
                   className="border border-black rounded-sm"
                   name="twitter-url"
+                  defaultValue={user?.twitter.url}
                 />
               </label>
             </div>
             <div className="flex gap-4">
               <label>
-                <p>Label LinkedIn</p>
+                <p>{user?.linkedIn.label}</p>
                 <input
+                  type="hidden"
                   className="border border-black rounded-sm"
                   name="linkedIn-label"
                   value={"LinkedIn"}
@@ -110,17 +118,18 @@ export default function Links() {
                 />
               </label>
               <label>
-                <p>Lien Linkedin</p>
                 <input
                   className="border border-black rounded-sm"
                   name="linkedIn-url"
+                  defaultValue={user?.linkedIn.url}
                 />
               </label>
             </div>
             <div className="flex gap-4">
               <label>
-                <p>Label Instagram</p>
+                <p>{user?.instagram.label}</p>
                 <input
+                  type="hidden"
                   className="border border-black rounded-sm"
                   name="instagram-label"
                   value={"Instagram"}
@@ -128,95 +137,100 @@ export default function Links() {
                 />
               </label>
               <label>
-                <p>Lien Instagram</p>
                 <input
                   className="border border-black rounded-sm"
                   name="instagram-url"
+                  defaultValue={user?.instagram.url}
                 />
               </label>
             </div>
             <div className="flex gap-4">
               <label>
-                <p>Label Lien 1</p>
+                <p>Label {user?.firstLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="firstLink-label"
-                  defaultValue={"Lien 1"}
+                  defaultValue={user?.firstLink.label}
                 />
               </label>
               <label>
-                <p>Lien Lien 1</p>
+                <p>Lien {user?.firstLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="firstLink-url"
+                  defaultValue={user?.firstLink.url}
                 />
               </label>
             </div>
             <div className="flex gap-4">
               <label>
-                <p>Label Lien 2</p>
+                <p>Label {user?.secondLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="secondLink-label"
-                  defaultValue={"Lien 2"}
+                  defaultValue={user?.secondLink.label}
                 />
               </label>
               <label>
-                <p>Lien Lien 2</p>
+                <p>Lien {user?.secondLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="secondLink-url"
+                  defaultValue={user?.secondLink.url}
                 />
               </label>
             </div>
             <div className="flex gap-4">
               <label>
-                <p>Label Lien 3</p>
+                <p>Label {user?.thirdLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="thirdLink-label"
-                  defaultValue={"Lien 3"}
+                  defaultValue={user?.thirdLink.label}
                 />
               </label>
               <label>
-                <p>Lien Lien 3</p>
+                <p>Lien {user?.thirdLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="thirdLink-url"
+                  defaultValue={user?.thirdLink.url}
                 />
               </label>
             </div>
             <div className="flex gap-4">
               <label>
-                <p>Label Lien 4</p>
+                <p>Label {user?.fourthLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="fourthLink-label"
-                  defaultValue={"Lien 4"}
+                  defaultValue={user?.fourthLink.label}
                 />
               </label>
               <label>
-                <p>Lien Lien 4</p>
+                <p>Lien {user?.fourthLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="fourthLink-url"
+                  defaultValue={user?.fourthLink.url}
                 />
               </label>
             </div>
             <div className="flex gap-4">
               <label>
-                <p>Lien Label Lien 5</p>
+                <p>Label {user?.fifthLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="fifthLink-label"
-                  defaultValue={"Lien 5"}
+                  defaultValue={user?.fifthLink.label}
                 />
               </label>
               <label>
-                <p>Lien Lien 5</p>
+                <p>Lien {user?.fifthLink.label}</p>
                 <input
                   className="border border-black rounded-sm"
                   name="fifthLink-url"
+                  defaultValue={user?.fifthLink.url}
                 />
               </label>
             </div>

@@ -1,12 +1,9 @@
 import { base } from "../config";
 
 export async function POST(request: Request) {
-  console.log(
-    "==================================================================================================================="
-  );
   try {
     const data = await request.formData();
-    const links = JSON.parse(data.get("links") as string);
+    const links = JSON.parse(data.get("links"));
 
     const id = links.id;
     let fields: { [key: string]: string } = {};
@@ -20,17 +17,22 @@ export async function POST(request: Request) {
       }
     );
 
-    const updatedRecords = await base("users").update([
+    let records = await base("users").update([
       {
         id,
         fields,
       },
     ]);
 
-    const updatedUser = updatedRecords[0].fields;
+    let user = null;
+
+    records.forEach((value) => {
+      user = value.fields;
+      user.id = value.getId();
+    });
 
     return Response.json({
-      user: updatedUser,
+      user,
     });
   } catch (error) {
     console.log(error);
