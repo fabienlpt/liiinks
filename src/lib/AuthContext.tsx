@@ -37,17 +37,18 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
       });
   }, []);
 
-  function parseUserData(user: object) {
-    user.behance = JSON.parse(user.behance);
-    user.linkedIn = JSON.parse(user.linkedIn);
-    user.firstLink = JSON.parse(user.firstLink);
-    user.secondLink = JSON.parse(user.secondLink);
-    user.thirdLink = JSON.parse(user.thirdLink);
-    user.fourthLink = JSON.parse(user.fourthLink);
-    user.fifthLink = JSON.parse(user.fifthLink);
-    user.facebook = JSON.parse(user.facebook);
-    user.instagram = JSON.parse(user.instagram);
-    user.twitter = JSON.parse(user.twitter);
+  function parseUserData(data: any) {
+    let user: User = data as User;
+    user.behance = JSON.parse(data.behance);
+    user.linkedIn = JSON.parse(data.linkedIn);
+    user.firstLink = JSON.parse(data.firstLink);
+    user.secondLink = JSON.parse(data.secondLink);
+    user.thirdLink = JSON.parse(data.thirdLink);
+    user.fourthLink = JSON.parse(data.fourthLink);
+    user.fifthLink = JSON.parse(data.fifthLink);
+    user.facebook = JSON.parse(data.facebook);
+    user.instagram = JSON.parse(data.instagram);
+    user.twitter = JSON.parse(data.twitter);
 
     return user;
   }
