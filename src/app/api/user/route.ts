@@ -37,6 +37,9 @@ export async function GET(request: Request) {
         if (columnValue) {
           try {
             const linkObject = JSON.parse(columnValue);
+            if (!linkObject.url) {
+              return;
+            }
             user.socialMedias.push(linkObject);
           } catch (error) {
             console.error(
@@ -59,6 +62,9 @@ export async function GET(request: Request) {
         if (columnValue) {
           try {
             const linkObject = JSON.parse(columnValue);
+            if (!linkObject.url) {
+              return;
+            }
             user.links.push(linkObject);
           } catch (error) {
             console.error(

@@ -3,7 +3,7 @@ import { base } from "../config";
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
-    const links = JSON.parse(data.get("links"));
+    const links = JSON.parse(data.get("links") as string);
 
     const id = links.id;
     let fields: { [key: string]: string } = {};

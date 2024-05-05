@@ -100,27 +100,26 @@ export default function MyAccount() {
           Liiinks
         </Link>
         <div className="w-full bg-white rounded-xl my-12">
+          <div className="flex items-center justify-around w-full">
+            <Link
+              href="/myaccount"
+              className="hover:text-gray-400 w-1/2 text-center border border-b-0 border-l-0 rounded-t-lg p-2"
+            >
+              Préférences
+            </Link>
+
+            <Link
+              href="/myaccount/links"
+              className="hover:text-gray-400 w-1/2 text-center border border-t-0 border-r-0 rounded-b-lg p-2"
+            >
+              Mes liens
+            </Link>
+          </div>
           <form
             onSubmit={handleSubmit}
-            className="w-full bg-white rounded mx-auto"
+            className="w-full bg-white rounded mx-auto mt-8"
           >
             <div className="flex flex-col items-center w-full">
-              <div className="flex items-center justify-around w-full">
-                <Link
-                  href="/myaccount"
-                  className="hover:text-gray-400 w-1/2 text-center border border-b-0 border-l-0 rounded-t-lg p-2"
-                >
-                  Préférences
-                </Link>
-
-                <Link
-                  href="/myaccount/links"
-                  className="hover:text-gray-400 w-1/2 text-center border border-t-0 border-r-0 rounded-b-lg p-2"
-                >
-                  Mes liens
-                </Link>
-              </div>
-
               <label className="flex gap-4 flex-col items-center">
                 <p>Avatar</p>
                 <div
