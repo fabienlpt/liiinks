@@ -29,12 +29,28 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
     axios
       .get(url)
       .then((response) => {
+        response.data.user = parseUserData(response.data.user);
         setUser(response.data.user);
       })
       .catch((error) => {
         console.error("Error verifying token:", error);
       });
   }, []);
+
+  function parseUserData(user: object) {
+    user.behance = JSON.parse(user.behance);
+    user.linkedIn = JSON.parse(user.linkedIn);
+    user.firstLink = JSON.parse(user.firstLink);
+    user.secondLink = JSON.parse(user.secondLink);
+    user.thirdLink = JSON.parse(user.thirdLink);
+    user.fourthLink = JSON.parse(user.fourthLink);
+    user.fifthLink = JSON.parse(user.fifthLink);
+    user.facebook = JSON.parse(user.facebook);
+    user.instagram = JSON.parse(user.instagram);
+    user.twitter = JSON.parse(user.twitter);
+
+    return user;
+  }
 
   async function login(email: string) {
     const body = { email };
@@ -55,6 +71,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
       .post("/api/user", formData)
       .then((response) => {
         if (response.status === 200) {
+          response.data.user = parseUserData(response.data.user);
           setUser(response.data.user);
         }
       })
